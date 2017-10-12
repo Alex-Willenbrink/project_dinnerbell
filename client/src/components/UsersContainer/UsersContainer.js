@@ -5,35 +5,13 @@ import Avatar from "material-ui/Avatar";
 import { List, ListItem } from "material-ui/List";
 import Paper from "material-ui/Paper";
 import { Link } from "react-router-dom";
+import UsersList from "./UsersList";
+import LoadingFork from "../LoadingFork";
 
 const listStyles = {
   width: "300px",
   top: "75px",
   position: "relative"
-};
-
-const UserList = ({ users }) => {
-  users = users.sort((a, b) => {
-    return new Date(a.createdAt) - new Date(b.createdAt);
-  });
-  return (
-    <Paper style={listStyles} zDepth={4}>
-      <List>
-        {users.map(user =>
-          <Link
-            to={`profile/${user._id}`}
-            key={user._id}
-            style={{ textDecoration: "none" }}
-          >
-            <ListItem
-              primaryText={user.username}
-              leftAvatar={<Avatar src={user.profilePicture} />}
-            />
-          </Link>
-        )}
-      </List>
-    </Paper>
-  );
 };
 
 class UsersContainer extends Component {
@@ -42,11 +20,23 @@ class UsersContainer extends Component {
   }
 
   render() {
+    let users = this.props.users || [];
+    users = users.sort((a, b) => {
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    });
+
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
-        {this.props.users
-          ? <UserList users={this.props.users} />
-          : <div>Loading...</div>}
+        {this.props.users ? (
+          <div>
+            <h1 className="landing-title">users</h1>
+            <UsersList users={users} />
+          </div>
+        ) : (
+          <div className="recipe-results">
+            <LoadingFork />
+          </div>
+        )}
       </div>
     );
   }

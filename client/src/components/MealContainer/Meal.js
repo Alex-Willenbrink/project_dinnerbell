@@ -1,5 +1,5 @@
 import React from "react";
-import { UsersList } from "../UsersContainer/UsersList";
+import UsersList from "../UsersContainer/UsersList";
 import PaperList from "../PaperList";
 import Paper from "material-ui/Paper";
 
@@ -42,31 +42,29 @@ const styles = {
 };
 
 // renders invitees that have accounts as user objects and that don't as strings
-const Guests = ({ unregGuests, regGuests }) =>
+const Guests = ({ unregGuests, regGuests }) => (
   <div>
-    {regGuests
-      ? <div>
-          <UsersList users={regGuests} title="Attending" />
-        </div>
-      : null}
-    {unregGuests.length
-      ? <div>
-          <PaperList title="others attending" data={unregGuests} />
-        </div>
-      : null}
-  </div>;
+    {regGuests ? (
+      <div>
+        <UsersList users={regGuests} title="Attending" />
+      </div>
+    ) : null}
+    {unregGuests.length ? (
+      <div>
+        <PaperList title="others attending" data={unregGuests} />
+      </div>
+    ) : null}
+  </div>
+);
 
-const RecipesList = ({ recipes }) =>
+const RecipesList = ({ recipes }) => (
   <div>
     <h3 style={styles.h3}>Recipes</h3>
     {recipes.length
-      ? recipes.map(recipe =>
-          <p key={recipe._id}>
-            {recipe.name}
-          </p>
-        )
+      ? recipes.map(recipe => <p key={recipe._id}>{recipe.name}</p>)
       : null}
-  </div>;
+  </div>
+);
 
 const Meal = ({ meal }) => {
   // Conditional check to populate the guests that do and don't have accounts with
@@ -80,9 +78,7 @@ const Meal = ({ meal }) => {
 
   return (
     <div style={styles.container}>
-      <h1 style={{ fontSize: "3em" }}>
-        {meal.name}
-      </h1>
+      <h1 style={{ fontSize: "3em" }}>{meal.name}</h1>
 
       <img
         src={meal.image || "https://imgur.com/gWYzeND.jpg"}

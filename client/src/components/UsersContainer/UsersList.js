@@ -4,7 +4,7 @@ import { List, ListItem } from "material-ui/List";
 import Paper from "material-ui/Paper";
 import { Link } from "react-router-dom";
 
-export const UsersList = ({ users, title }) =>
+const UsersList = ({ users, title }) => (
   <Paper zDepth={4} style={{ borderRadius: "25px" }}>
     <h3
       style={{
@@ -17,7 +17,7 @@ export const UsersList = ({ users, title }) =>
       {title}
     </h3>
     <List>
-      {users.map(user =>
+      {users.map(user => (
         <Link
           to={`/profile/${user._id}`}
           key={user._id}
@@ -28,6 +28,9 @@ export const UsersList = ({ users, title }) =>
             leftAvatar={<Avatar src={user.profilePicture} />}
           />
         </Link>
-      )}
+      ))}
     </List>
-  </Paper>;
+  </Paper>
+);
+
+export default UsersList;

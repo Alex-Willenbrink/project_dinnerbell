@@ -23,8 +23,8 @@ class Landing extends Component {
   }
 
   render() {
-    const buttonOptions = !this.state.finishedLoading ? null : !this.props
-      .userReducer.user ? (
+    const buttonOptions = (this.state.finishedLoading && !this.props
+      .userReducer.user) ? (
       <div className="landing-auth-container">
         <button
           onClick={() => {
@@ -53,7 +53,7 @@ class Landing extends Component {
     );
 
     const authOptions =
-      !this.props.userReducer.user  && this.state.finishedLoading ? (
+      !this.props.userReducer.user  && this.state.finishedLoading && (
         <div className="oauth-landing">
           <a href="/auth/facebook">
             <img src="https://imgur.com/Hw9YUrJ.png" alt="" />
@@ -62,7 +62,7 @@ class Landing extends Component {
             <img src="https://i.imgur.com/ETp8DOT.png" alt="" />
           </a>
         </div>
-      ) : null;
+      );
 
     return (
       <section className="landing">

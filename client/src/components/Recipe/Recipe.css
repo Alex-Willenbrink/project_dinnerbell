@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .recipe-container {
   display: flex;
   flex-direction: column;
@@ -444,7 +446,13 @@ h2 {
     }
 }*/
 
-@charset "UTF-8";
+.performance-container {
+  display: flex;
+  width: inherit;
+  height: 100%;
+  justify-content: center;
+}
+
 .performance-facts {
   font-size: small;
   line-height: 1.4;
@@ -452,6 +460,7 @@ h2 {
   margin: 20px;
   float: left;
   width: 300px;
+  height: 100%;
   background: white;
   color: black;
   padding: 0.5rem;
@@ -553,6 +562,7 @@ h2 {
 
 .nutrition-btn-container {
   margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -34,12 +34,6 @@ const RecipeCard = ({
 }) => {
   return (
     <Card className={`recipe-card delay-${index}`}>
-      <ReactTooltip
-        place="left"
-        type="dark"
-        effect="float"
-        className="recipe-btn-tooltip"
-      />
       <Link to={`/recipes/${recipe._id}`}>
         <CardMedia>
           <img src={recipe.image} alt="" />
@@ -60,8 +54,14 @@ const RecipeCard = ({
           </p>
         </article>
       </Link>
+      <ReactTooltip
+          place="left"
+          type="dark"
+          effect="float"
+          className="recipe-btn-tooltip"
+        />
       {user && user._id
-        ? <FloatingActionButton
+        && <FloatingActionButton
             data-tip={
               recipeBelongsToUser(user, recipe) ? "remove recipe" : "add recipe"
             }
@@ -77,8 +77,7 @@ const RecipeCard = ({
             {recipeBelongsToUser(user, recipe)
               ? <ContentRemove />
               : <ContentAdd />}
-          </FloatingActionButton>
-        : null}
+          </FloatingActionButton>}
     </Card>
   );
 };
