@@ -4,7 +4,7 @@ import TextField from "material-ui/TextField";
 import asyncValidate from "../../services/AsyncValidate";
 import CircularProgress from "material-ui/CircularProgress";
 import { withRouter } from "react-router-dom";
-import swal from 'sweetalert2';
+import swal from "sweetalert2";
 
 import "./SignupForm.css";
 
@@ -32,41 +32,36 @@ const validate = values => {
 class SignupForm extends Component {
   onSubmit = () => {
     const { registerUser, formData, setUserError } = this.props;
-    const {  email, password } = formData.SignupForm.values;
+    const { email, password } = formData.SignupForm.values;
 
     registerUser({
       email,
       password
     }).then(() => {
       if (this.props.userReducer.userError) {
-        swal(
-          'Oops...',
-          'Something went wrong! Please try again.',
-          'error'
-        );
+        swal("Oops...", "Something went wrong! Please try again.", "error");
         setUserError(null);
       } else {
         swal({
-          title: 'Success!',
-          text: 'You are registered!',
+          title: "Success!",
+          text: "You are registered!",
           timer: 2000,
-          onOpen: function () {
-            swal.showLoading()
+          onOpen: function() {
+            swal.showLoading();
           }
-        })
+        }).catch(swal.noop);
       }
     });
   };
 
-  renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
+  renderTextField = ({ input, label, meta: { touched, error }, ...custom }) =>
     <TextField
       hintText={label}
       floatingLabelText={label}
       errorText={touched && error}
       {...input}
       {...custom}
-    />
-  );
+    />;
 
   render() {
     const {
@@ -78,19 +73,23 @@ class SignupForm extends Component {
       userReducer
     } = this.props;
 
-    const authOptions = !userReducer.user ? (
-      <div className="oauth">
-        <a href="/auth/facebook">
-          <img src="https://imgur.com/Hw9YUrJ.png" alt="" />
-        </a>
-        <a href="/auth/google">
-          <img src="https://i.imgur.com/ETp8DOT.png" alt="" />
-        </a>
-      </div>
-    ) : null;
+    const authOptions = !userReducer.user
+      ? <div className="oauth">
+          <a href="/auth/facebook">
+            <img src="https://imgur.com/Hw9YUrJ.png" alt="" />
+          </a>
+          <a href="/auth/google">
+            <img src="https://i.imgur.com/ETp8DOT.png" alt="" />
+          </a>
+        </div>
+      : null;
 
     if (userLoading && !this.props.userReducer.userError) {
-      return <div><CircularProgress size={80} thickness={3} color="#fc5830" /></div>;
+      return (
+        <div>
+          <CircularProgress size={80} thickness={3} color="#fc5830" />
+        </div>
+      );
     }
 
     return (

@@ -54,8 +54,11 @@ export const setAllUsers = users => {
 export const checkCurrentUser = () => async dispatch => {
   try {
     const payload = await AsyncManager.getRequest("/auth/current-user");
-    if (payload && payload.errors) throw new Error(payload.errors[0]);
-    dispatch(setCurrentUser(payload));
+    if (payload && payload.errors) {
+      throw new Error(payload.errors[0]);
+    } else {
+      dispatch(setCurrentUser(payload));
+    }
   } catch (e) {
     dispatch(setUserError(e.message));
   }
@@ -65,8 +68,11 @@ export const registerUser = data => async dispatch => {
   try {
     dispatch(setUserLoading(true));
     const payload = await AsyncManager.postRequest("/auth/register", data);
-    if (payload && payload.errors) throw new Error(payload.errors[0]);
-    dispatch(setCurrentUser(payload));
+    if (payload && payload.errors) {
+      throw new Error(payload.errors[0]);
+    } else {
+      dispatch(setCurrentUser(payload));
+    }
     dispatch(setUserLoading(false));
   } catch (e) {
     dispatch(setUserError(e.message));
@@ -77,8 +83,11 @@ export const loginUser = data => async dispatch => {
   try {
     dispatch(setUserLoading(true));
     const payload = await AsyncManager.postRequest("/auth/login", data);
-    if (payload && payload.errors) throw new Error(payload.errors[0]);
-    dispatch(setCurrentUser(payload));
+    if (payload && payload.errors) {
+      throw new Error(payload.errors[0]);
+    } else {
+      dispatch(setCurrentUser(payload));
+    }
     dispatch(setUserLoading(false));
   } catch (e) {
     dispatch(setUserError(e.message));
@@ -103,7 +112,7 @@ export const updateUser = userObj => async dispatch => {
     );
     if (payload && payload.errors) throw new Error(payload.errors[0]);
     if (payload && payload.error) throw new Error(payload.error);
-    dispatch(setUserLoading(false))
+    dispatch(setUserLoading(false));
     dispatch(setCurrentUser(payload));
   } catch (e) {
     dispatch(setUserError(e.message));
@@ -129,9 +138,7 @@ export const getUsers = () => async dispatch => {
 };
 export const addRecipe = (userId, recipeId) => async dispatch => {
   try {
-    await AsyncManager.patchRequest(
-      `/api/users/${userId}/recipes/${recipeId}`
-    );
+    await AsyncManager.patchRequest(`/api/users/${userId}/recipes/${recipeId}`);
   } catch (err) {
     console.error(err);
   }

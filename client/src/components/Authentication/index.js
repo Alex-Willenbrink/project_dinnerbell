@@ -10,7 +10,7 @@ import "./Authentication.css";
 import _ from "lodash";
 
 class Authentication extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.userActions.checkCurrentUser();
   }
 

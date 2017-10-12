@@ -45,6 +45,8 @@ class CreateMeal extends Component {
       let filtered = userReducer.users.filter(
         user => user.username !== userReducer.user.username
       );
+
+      console.log("userReducer.user: ", userReducer.user);
       let recipes = userReducer.user.recipes || [];
 
       filtered.forEach((item, index) => {
@@ -178,16 +180,18 @@ class CreateMeal extends Component {
         onOpen: function() {
           swal.showLoading();
         }
-      }).then(
-        () => {},
-        // handling the promise rejection
-        dismiss => {
-          if (dismiss === "timer") {
-            this.props.history.push(`/profile/${userReducer.user._id}`);
-            console.log("I was closed by the timer");
+      })
+        .then(
+          () => {},
+          // handling the promise rejection
+          dismiss => {
+            if (dismiss === "timer") {
+              this.props.history.push(`/profile/${userReducer.user._id}`);
+              console.log("I was closed by the timer");
+            }
           }
-        }
-      );
+        )
+        .catch(swal.noop);
     });
   };
 
