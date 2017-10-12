@@ -45,6 +45,7 @@ class CreateMeal extends Component {
       let filtered = userReducer.users.filter(
         user => user.username !== userReducer.user.username
       );
+      console.log("what is this recipes: ", userReducer.user);
       let recipes = [...userReducer.user.recipes];
 
       console.log(recipes, "recipes??");
@@ -195,7 +196,6 @@ class CreateMeal extends Component {
             this.props.history.push(`/profile/${userReducer.user._id}`);
           }
         }
-
       );
     });
   };
